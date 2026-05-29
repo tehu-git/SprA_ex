@@ -22,6 +22,7 @@ public class MyCanvas extends JPanel
 
     public void addDrawing(MyDrawing d){
         drawings.add(d);
+
     }
 
     public void removeDrawing(MyDrawing d){

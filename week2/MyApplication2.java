@@ -39,7 +39,7 @@ class MyMouseAdapter extends MouseAdapter
     }
 
     public void mousePressed(MouseEvent e){
-        canvas.addDrawing(new MyRectangle(e.getX(), e.getY()));
+        canvas.addDrawing(new MyRectangle(e.getX(), e.getY(), true));
 
         canvas.repaint();
     }

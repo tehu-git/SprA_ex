@@ -7,7 +7,7 @@ public class MyDrawing
     private int x, y, w, h, size;
     private Color lineColor, fillColor;
     private int lineWidth;
-    private boolean dashed;
+    private boolean dashed = false;
 
     public MyDrawing(){
         x = y = 0;
@@ -24,6 +24,14 @@ public class MyDrawing
         this.y = y;
         w = 40;
         h = 40;
+    }
+
+    public MyDrawing(int x, int y, boolean d){
+        this.x = x;
+        this.y = y;
+        w = 40;
+        h = 40;
+        this.dashed = d;
     }
 
     public MyDrawing(int x, int y, int w, int h){
@@ -74,8 +82,8 @@ public class MyDrawing
         this.lineWidth = lineWidth;
     }
 
-    public void setDashed(boolean dashed){
-        this.dashed = dashed;
+    public void setDashed(boolean b){
+        dashed = b;
     }
 
 
@@ -111,7 +119,7 @@ public class MyDrawing
         return lineWidth;
     }
 
-    public boolean isDashed(){
+    public boolean getDashed(){
         return dashed;
     }
 }

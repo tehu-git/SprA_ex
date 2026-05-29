@@ -4,23 +4,36 @@ import java.awt.event.*;
 
 public class MyApplication extends JFrame
 {
+
+    StateManager stateManager;
+    MyCanvas canvas;
+
     public MyApplication(){
         super("My Painter");
 
-        JPanel jp = new JPanel();
-        jp.setLayout(new BorderLayout());
-        this.getContentPane().add(jp);
+        canvas = new MyCanvas();
+        canvas.setBackground(Color.white);
 
-        MyCanvas canvas = new MyCanvas();
-        for (int i = 0; i<8; i++){
-            //canvas.addDrawing(new MyHendecagonal(40 + i*40, 40+ i*40));
-            //canvas.addDrawing(new MyOval(80 + i*80, 40 + i*40));
-            canvas.addDrawing(new MyHendecagonal(40 + i*40, 40+ i*40));
-            canvas.addDrawing(new MyHendecagonal(40 + i*40, 40 + i*40, 50, 50));
-            //canvas.addDrawing(new MyfiveStar(40 + i*40, 40+ i*40));
-            canvas.addDrawing(new MyHendecagonal(80 + i*80, 80+ i*80, 60, 60, Color.blue));
-        }
-        jp.add(BorderLayout.CENTER, canvas);
+        JPanel jp = new JPanel();
+        jp.setLayout(new FlowLayout());
+
+        stateManager = new StateManager(canvas);
+        
+        RectButton rectButton = new RectButton(stateManager);
+        jp.add(rectButton);
+        OvalButton ovalbutton = new OvalButton(stateManager);
+        jp.add(ovalbutton);
+
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(jp, BorderLayout.NORTH);
+        getContentPane().add(canvas, BorderLayout.CENTER);
+
+        canvas.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                stateManager.mouseDown(e.getX(), e.getY());
+                canvas.repaint();
+            }
+        });
 
         this.addWindowListener(
             new WindowAdapter(){
@@ -29,6 +42,10 @@ public class MyApplication extends JFrame
                 }
             }
         );
+    }
+
+    public Dimension getPreferredSize(){
+        return new Dimension(300, 400);
     }
 
 
