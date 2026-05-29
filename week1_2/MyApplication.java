@@ -13,8 +13,12 @@ public class MyApplication extends JFrame
 
         MyCanvas canvas = new MyCanvas();
         for (int i = 0; i<8; i++){
+            //canvas.addDrawing(new MyHendecagonal(40 + i*40, 40+ i*40));
+            //canvas.addDrawing(new MyOval(80 + i*80, 40 + i*40));
             canvas.addDrawing(new MyHendecagonal(40 + i*40, 40+ i*40));
-            canvas.addDrawing(new MyRectangle(40 + i*40, 40+ i*40));
+            canvas.addDrawing(new MyHendecagonal(40 + i*40, 40 + i*40, 50, 50));
+            //canvas.addDrawing(new MyfiveStar(40 + i*40, 40+ i*40));
+            canvas.addDrawing(new MyHendecagonal(80 + i*80, 80+ i*80, 60, 60, Color.blue));
         }
         jp.add(BorderLayout.CENTER, canvas);
 

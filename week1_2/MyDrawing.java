@@ -4,9 +4,10 @@ import javax.swing.JPanel;
 
 public class MyDrawing 
 {
-    private int x, y, w, h;
+    private int x, y, w, h, size;
     private Color lineColor, fillColor;
     private int lineWidth;
+    private boolean dashed;
 
     public MyDrawing(){
         x = y = 0;
@@ -15,7 +16,31 @@ public class MyDrawing
         lineColor = Color.black;
         fillColor = Color.white;
         lineWidth = 1;
+    }
 
+
+    public MyDrawing(int x, int y){
+        this.x = x;
+        this.y = y;
+        w = 40;
+        h = 40;
+    }
+
+    public MyDrawing(int x, int y, int w, int h){
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+
+ 
+
+    public MyDrawing(int x, int y, int w, int h, Color lineColor){
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.lineColor = lineColor;
     }
     
 
@@ -33,10 +58,26 @@ public class MyDrawing
         this.y = y;
     }
 
-    public void setSize(int w, int h){
-        w = w *2;
-        h = h *2;
+    public void setSize(int size){
+        this.size = size;
     }
+
+    public void setLineColor(Color lineColor){
+        this.lineColor = lineColor;
+    }
+
+    public void setFillColor(Color fillColor){
+        this.fillColor = fillColor;
+    }
+
+    public void setLineWidth(int lineWidth){
+        this.lineWidth = lineWidth;
+    }
+
+    public void setDashed(boolean dashed){
+        this.dashed = dashed;
+    }
+
 
     public int getX(){
         return x;
@@ -54,6 +95,10 @@ public class MyDrawing
         return h;
     }
 
+    public int setSize(){
+        return size;
+    }
+
     public Color getFillColor(){
         return fillColor;
     }
@@ -64,5 +109,9 @@ public class MyDrawing
 
     public int getLineWidth(){
         return lineWidth;
+    }
+
+    public boolean isDashed(){
+        return dashed;
     }
 }
