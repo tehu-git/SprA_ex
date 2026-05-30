@@ -7,6 +7,10 @@ public class MyOval extends MyDrawing
         setLocation(xpt, ypt);
     }
 
+    public MyOval(int x, int y, boolean isdashed){
+        super(x, y, isdashed);
+    }
+
     public void draw( Graphics g){
         int x = getX();
         int y = getY();

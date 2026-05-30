@@ -23,6 +23,8 @@ public class MyApplication extends JFrame
         jp.add(rectButton);
         OvalButton ovalbutton = new OvalButton(stateManager);
         jp.add(ovalbutton);
+        fiveStarButton starButton = new fiveStarButton(stateManager);
+        jp.add(starButton);
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jp, BorderLayout.NORTH);
@@ -31,6 +33,16 @@ public class MyApplication extends JFrame
         canvas.addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent e){
                 stateManager.mouseDown(e.getX(), e.getY());
+                canvas.repaint();
+            }
+
+            public void mouseDragged(MouseEvent e){
+                stateManager.mouseDrag(e.getX(), e.getY());
+                canvas.repaint();
+            }
+
+            public void mouseReleased(MouseEvent e){
+                stateManager.mouseUp(e.getX(), e.getY());
                 canvas.repaint();
             }
         });

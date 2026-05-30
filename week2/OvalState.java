@@ -1,3 +1,4 @@
+/*
 public class OvalState implements State
 {
     StateManager stateManager;
@@ -17,4 +18,4 @@ public class OvalState implements State
     public void mouseDrag(int x, int y){
         //stateManager.
     }
-}
+}*/

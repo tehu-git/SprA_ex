@@ -29,8 +29,8 @@ public class MyDrawing
     public MyDrawing(int x, int y, boolean d){
         this.x = x;
         this.y = y;
-        w = 40;
-        h = 40;
+        w = 0;
+        h = 0;
         this.dashed = d;
     }
 

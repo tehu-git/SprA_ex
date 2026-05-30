@@ -2,29 +2,29 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class OvalButton extends JButton implements State
+public class fiveStarButton extends JButton implements State
 {
     StateManager stateManager;
-    
-    public OvalButton(StateManager stateManager){
-        super("Oval");
 
-        addActionListener(new OvalListener());
+    public fiveStarButton(StateManager stateManager){
+        super("fivestar");
+
+        addActionListener(new fiveStarListener());
 
         this.stateManager = stateManager;
     }
 
-    class OvalListener implements ActionListener{
+    class fiveStarListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            stateManager.setState(OvalButton.this);
+            stateManager.setState(fiveStarButton.this);
         }
     }
 
     @Override
     public void mouseDown(int x, int y){
-        stateManager.addDrawing(new MyOval(x, y));
+        stateManager.addDrawing(new MyfiveStar(x, y));
     }
-
+    
     public void mouseUp(int x, int y){
         //stateManager.
     }
@@ -32,4 +32,6 @@ public class OvalButton extends JButton implements State
     public void mouseDrag(int x, int y){
         //stateManager.
     }
+
 }
+

@@ -7,7 +7,7 @@ public class StateManager {
 
     public StateManager(MyCanvas canvas){
         this.canvas = canvas;
-        nowState = new RectState(this);
+        nowState = null;
         dashed = false;
     }
 
