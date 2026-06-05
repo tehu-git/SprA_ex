@@ -5,9 +5,13 @@ import javax.swing.JPanel;
 public class MyDrawing 
 {
     private int x, y, w, h, size;
-    private Color lineColor, fillColor;
+    private Color lineColor = Color.black; 
+    private Color fillColor = Color.white;
     private int lineWidth;
     private boolean dashed = false;
+    private boolean shadow = false;
+    private boolean ishortdash = false;
+    private boolean tripline = false;
 
     public MyDrawing(){
         x = y = 0;
@@ -29,8 +33,8 @@ public class MyDrawing
     public MyDrawing(int x, int y, boolean d){
         this.x = x;
         this.y = y;
-        w = 0;
-        h = 0;
+        w = 40;
+        h = 40;
         this.dashed = d;
     }
 
@@ -39,6 +43,16 @@ public class MyDrawing
         this.y = y;
         this.w = w;
         this.h = h;
+        //this.dashed = d;
+    }
+
+
+    public MyDrawing(int x, int y, int w, int h, boolean d){
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.dashed = d;
     }
 
  
@@ -67,7 +81,16 @@ public class MyDrawing
     }
 
     public void setSize(int size){
-        this.size = size;
+        this.w = size;
+        this.h = size;
+    }
+
+    public void setW(int w){
+        this.w = w;
+    }
+
+    public void setH(int h){
+        this.h = h;
     }
 
     public void setLineColor(Color lineColor){
@@ -85,6 +108,38 @@ public class MyDrawing
     public void setDashed(boolean b){
         dashed = b;
     }
+
+    public void setShadow(boolean s){
+        shadow = s;
+    }
+
+    public void setShortDashed(boolean d){
+        this.ishortdash = d;
+    }
+
+
+    public boolean getShortDashed(){
+        return this.ishortdash;
+    }
+    
+    public void setBold(boolean b){
+        if (b){
+            lineWidth = 3;
+        }
+        else{
+            lineWidth = 1;
+        }
+    }
+
+    public void setTripLine(boolean t){
+        this.tripline = t;
+    }
+
+    public boolean getTripLine(){
+        return this.tripline;
+    }
+
+
 
 
     public int getX(){
@@ -121,5 +176,9 @@ public class MyDrawing
 
     public boolean getDashed(){
         return dashed;
+    }
+
+    public boolean getShadow(){
+        return shadow;
     }
 }

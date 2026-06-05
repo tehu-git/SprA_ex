@@ -4,11 +4,19 @@ public class StateManager {
     private State nowState;
     private MyCanvas canvas; 
     private boolean dashed;
+    private boolean shadow;
+    private boolean ishortdash;
+    private boolean bold;
+    private boolean tripline;
 
     public StateManager(MyCanvas canvas){
         this.canvas = canvas;
         nowState = null;
         dashed = false;
+        shadow = false;
+        ishortdash = false;
+        bold = false;
+        tripline = false;
     }
 
     public void setState(State s){
@@ -16,7 +24,43 @@ public class StateManager {
     }
 
     public void setDashed(boolean d){
-        dashed = d;
+        this.dashed = d;
+    }
+
+    public void setShadow(boolean s){
+        this.shadow = s;
+    }
+
+    public boolean getDashed(){
+        return this.dashed;
+    }
+
+    public boolean getshadow(){
+        return this.shadow;
+    }
+
+    public void setShortDashed(boolean d){
+        this.ishortdash = d;
+    }
+
+     public boolean getShortDashed(){
+        return this.ishortdash;
+    }
+
+    public void setBold(boolean b){
+        this.bold = b;
+    }
+
+    public boolean getBold(){
+        return this.bold;
+    }
+
+    public void setTripLine(boolean t){
+        this.tripline = t;
+    }
+
+    public boolean getTripLine(){
+        return this.tripline;
     }
 
     public void addDrawing(MyDrawing d){
@@ -26,6 +70,18 @@ public class StateManager {
     public void mouseDown(int x, int y){
         if (nowState != null){
             nowState.mouseDown(x, y);
+        }
+    }
+
+    public void mouseDrag(int x, int y){
+        if (nowState != null){
+            nowState.mouseDrag(x, y);
+        }
+    }
+
+    public void mouseUp(int x, int y){
+        if (nowState != null){
+            nowState.mouseUp(x, y);
         }
     }
 }

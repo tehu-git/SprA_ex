@@ -7,6 +7,10 @@ public class MyfiveStar extends MyDrawing
         setLocation(xpt, ypt);
     }
 
+    public MyfiveStar(int x, int y, int w, int h){
+        super(x, y, w, h);
+    }
+
     public void draw(Graphics g){
         int x = getX();
         int y = getY();
@@ -25,8 +29,14 @@ public class MyfiveStar extends MyDrawing
         }
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(getLineWidth()));
-        g2.setColor(getFillColor());
+        if(getDashed()){
+            g2.setStroke(new MyDashStroke(getLineWidth()));
+        }
+        else{
+            g2.setStroke(new BasicStroke(getLineWidth()));
+        }
+        //g2.setStroke(new BasicStroke(getLineWidth()));
+        //g2.setColor(getFillColor());
         g2.setColor(getLineColor());
         g2.drawPolygon(xlist, ylist, n);
     }

@@ -5,7 +5,9 @@ import javax.swing.*;
 public class RectButton extends JButton implements State
 {
     StateManager stateManager;
-    
+    MyDrawing currentDrawing;
+    int startX, startY; 
+
     public RectButton(StateManager stateManager){
         super("Rectangle");
 
@@ -22,14 +24,30 @@ public class RectButton extends JButton implements State
 
     @Override
     public void mouseDown(int x, int y){
-        stateManager.addDrawing(new MyRectangle(x, y));
+        startX = x;
+        startY = y;
+        currentDrawing = new MyRectangle(x, y, 0, 0);
+        currentDrawing.setDashed(stateManager.getDashed());
+        stateManager.addDrawing(currentDrawing);
+        currentDrawing.setShadow(stateManager.getshadow());
+        currentDrawing.setShortDashed(stateManager.getShortDashed());
+        currentDrawing.setBold(stateManager.getBold());
+        currentDrawing.setTripLine(stateManager.getTripLine());
     }
 
     public void mouseUp(int x, int y){
-        //stateManager.
+        //currentDrawing.setDashed(false);
     }
 
     public void mouseDrag(int x, int y){
-        //stateManager.
+        
+        if(currentDrawing != null){
+            int drawx = Math.min(x, startX);
+            int drawy = Math.min(y, startY);
+
+            currentDrawing.setLocation(drawx, drawy);
+            currentDrawing.setW(Math.abs(x - startX));
+            currentDrawing.setH(Math.abs(y - startY));
+        }
     } 
 }

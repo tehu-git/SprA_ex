@@ -38,7 +38,13 @@ public class MyHendecagonal extends MyDrawing
         }
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(getLineWidth()));
+        if(getDashed()){
+            g2.setStroke(new MyDashStroke(getLineWidth()));
+        }
+        else{
+            g2.setStroke(new BasicStroke(getLineWidth()));
+        }
+        //g2.setStroke(new BasicStroke(getLineWidth()));
         g2.setColor(getFillColor());
         //g2.fillPolygon(xlist, ylist, n);
         g2.setColor(getLineColor());

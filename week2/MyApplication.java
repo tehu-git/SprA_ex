@@ -25,6 +25,18 @@ public class MyApplication extends JFrame
         jp.add(ovalbutton);
         fiveStarButton starButton = new fiveStarButton(stateManager);
         jp.add(starButton);
+        HendecagonButton hendecagButton = new HendecagonButton(stateManager);
+        jp.add(hendecagButton);
+        shadowButton shadowbutton = new shadowButton(stateManager);
+        jp.add(shadowbutton);
+        dashBox dashbox = new dashBox(stateManager);
+        jp.add(dashbox);
+        changeDash changeDash = new changeDash(stateManager);
+        jp.add(changeDash);
+        boldBox boldbox = new boldBox(stateManager);
+        jp.add(boldbox);
+        tripleLineBox triplinebox = new tripleLineBox(stateManager);
+        jp.add(triplinebox);
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(jp, BorderLayout.NORTH);
@@ -36,13 +48,15 @@ public class MyApplication extends JFrame
                 canvas.repaint();
             }
 
-            public void mouseDragged(MouseEvent e){
-                stateManager.mouseDrag(e.getX(), e.getY());
-                canvas.repaint();
-            }
-
             public void mouseReleased(MouseEvent e){
                 stateManager.mouseUp(e.getX(), e.getY());
+                canvas.repaint();
+            }
+        });
+
+        canvas.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent e){
+                stateManager.mouseDrag(e.getX(), e.getY());
                 canvas.repaint();
             }
         });
