@@ -27,10 +27,6 @@ public class MyApplication extends JFrame
         jp.add(starButton);
         HendecagonButton hendecagButton = new HendecagonButton(stateManager);
         jp.add(hendecagButton);
-        SelectmodeButton selectmodebutton = new SelectmodeButton(stateManager);
-        jp.add(selectmodebutton);
-
-
         shadowButton shadowbutton = new shadowButton(stateManager);
         jp.add(shadowbutton);
         dashBox dashbox = new dashBox(stateManager);

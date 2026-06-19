@@ -7,15 +7,15 @@ public class MyDrawing
     private int x, y, w, h, size;
     private Color lineColor = Color.black; 
     private Color fillColor = Color.white;
+    private boolean isSelected = false;
+    private Shape region;
+    final int SIZE = 7;
+
     private int lineWidth;
     private boolean dashed = false;
     private boolean shadow = false;
     private boolean ishortdash = false;
     private boolean tripline = false;
-
-    private boolean isselected = false;
-
-    final int SIZE = 7;
 
     public MyDrawing(){
         x = y = 0;
@@ -71,16 +71,16 @@ public class MyDrawing
     
 
     public void draw (Graphics g){
-        if (isselected){
+        if(isSelected){
             g.setColor(Color.black);
-            g.fillRect(x+w/2-SIZE/2, y-SIZE/2, SIZE, SIZE);
-            g.fillRect(x-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
-            g.fillRect(x+w/2-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
-            g.fillRect(x+w-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
-            g.fillRect(x-SIZE/2, y-SIZE/2, SIZE, SIZE);
-            g.fillRect(x+w-SIZE/2, y-SIZE/2, SIZE, SIZE);
-            g.fillRect(x-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
-            g.fillRect(x+w-SIZE/2, y+h-SIZE, SIZE, SIZE);
+            g.drawRect(x+w/2-SIZE/2, y-SIZE/2, SIZE, SIZE);
+            g.drawRect(x-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
+            g.drawRect(x+w/2-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
+            g.drawRect(x+w-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
+            g.drawRect(x-SIZE/2, y-SIZE/2, SIZE, SIZE);
+            g.drawRect(x+w-SIZE/2, y-SIZE/2, SIZE, SIZE);
+            g.drawRect(x-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
+            g.drawRect(x+w-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
         }
     }
 
@@ -129,6 +129,14 @@ public class MyDrawing
 
     public void setShortDashed(boolean d){
         this.ishortdash = d;
+    }
+
+    public void setSelected(boolean s){
+        this.isSelected = s;
+    }
+
+    public boolean getSelected(){
+        return isSelected;
     }
 
 
@@ -196,18 +204,17 @@ public class MyDrawing
         return shadow;
     }
 
-    public boolean getSelected(){
-        return isselected;
-    }
 
+    //week3‰ª•Èôç
     public boolean contains(int x, int y){
-        //äeéqÉNÉâÉXÇ≈é¿ëï
-        //ex: return region.contains(x, y);
+        if (region != null){
+            return region.contains(x, y);
+        }
         return false;
     }
 
     public void setRegion(){
-        //äeéqÉNÉâÉXÇ≈é¿ëï
-        //ex: region = new Rectangle(x, y, w, h);
+
     }
 }
+
