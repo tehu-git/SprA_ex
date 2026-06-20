@@ -64,8 +64,9 @@ public class StateManager {
         return this.tripline;
     }
 
+
     public Mediator getMediator(){
-        return this.mediator;
+        return canvas.getMediator();
     }
 
     public void addDrawing(MyDrawing d){

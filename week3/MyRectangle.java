@@ -17,12 +17,12 @@ public class MyRectangle extends MyDrawing
     }
     @Override
     public void setRegion(){
-        Shape region = new Rectangle(getX(), getY(), getW(), getH());
+        region = new Rectangle(getX(), getY(), getW(), getH());
     }
 
     @Override
     public void draw(Graphics g){
-        super.draw(g);
+        
 
         setRegion();
 
@@ -67,6 +67,7 @@ public class MyRectangle extends MyDrawing
             g2.drawRect(x, y, w, h);
         }
         g2.drawRect(x, y, w, h);
+        super.draw(g);
     }
 
 }

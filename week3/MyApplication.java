@@ -1,12 +1,17 @@
 import java.awt.*;
+
+import javax.print.attribute.standard.Media;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class MyApplication extends JFrame
+public class MyApplication extends JFrame implements ActionListener
 {
 
     StateManager stateManager;
     MyCanvas canvas;
+    private JMenuBar menuBar;
+    private JMenu colorMenu;
+    private JMenuItem redItem, blueItem, greenItem, elseItem;
 
     public MyApplication(){
         super("My Painter");
@@ -18,7 +23,28 @@ public class MyApplication extends JFrame
         jp.setLayout(new FlowLayout());
 
         stateManager = new StateManager(canvas);
+
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        colorMenu = new JMenu("Color");
+        redItem = new JMenuItem("Red");
+        blueItem = new JMenuItem("Blue");
+        greenItem = new JMenuItem("Green");
+        elseItem = new JMenuItem("else");
+
+        colorMenu.add(redItem);
+        colorMenu.add(blueItem);
+        colorMenu.add(greenItem);
+        colorMenu.add(elseItem);
+        redItem.addActionListener(new ChangeColorListener(stateManager.getMediator(), Color.red));
+        blueItem.addActionListener(new ChangeColorListener(stateManager.getMediator(), Color.blue));
+        greenItem.addActionListener(new ChangeColorListener(stateManager.getMediator(), Color.green));
+
+        menuBar.add(colorMenu);
         
+        SelectmodeButton selectButton = new SelectmodeButton(stateManager);
+        jp.add(selectButton);
         RectButton rectButton = new RectButton(stateManager);
         jp.add(rectButton);
         OvalButton ovalbutton = new OvalButton(stateManager);
@@ -71,13 +97,25 @@ public class MyApplication extends JFrame
     }
 
     public Dimension getPreferredSize(){
-        return new Dimension(300, 400);
+        return new Dimension(800, 600);
     }
 
 
     public static void main(String[] args){
         MyApplication app = new MyApplication();
-        app.setSize(400, 300);
+        app.setSize(800, 600);
         app.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        if (e.getSource() == redItem){
+            stateManager.getMediator().setColor(Color.red);
+        }
+        else if (e.getSource() == blueItem){
+            stateManager.getMediator().setColor(Color.blue);
+        }
+        else if (e.getSource() == greenItem){
+            stateManager.getMediator().setColor(Color.green);
+        }
     }
 }

@@ -1,5 +1,6 @@
 import java.util.Enumeration;
 import java.util.Vector;
+import java.awt.*;
 
 public class Mediator {
     Vector<MyDrawing> drawings;
@@ -39,16 +40,39 @@ public class Mediator {
         canvas.repaint();
     }
 
+    public void clearSelected(){
+        if(selectedDrawing != null){
+            selectedDrawing.setSelected(false);
+            selectedDrawing = null;
+        }
+    }
+
+    public void setColor(Color c){
+        if (selectedDrawing != null){
+            selectedDrawing.setLineColor(c);
+            selectedDrawing.setFillColor(c);
+        }
+    }
+
     public void setSelected(int x, int y){
         int size = drawings.size();
+        MyDrawing found = null;
         for (int i = size -1; i >= 0; i--){
             MyDrawing d = drawings.get(i);
             if (d.contains(x, y)){
-                selectedDrawing = d;
-                selectedDrawing.setSelected(true);
+                found = d;
                 break;
             }
         }
+        if (found != null){
+            if (found != selectedDrawing){
+                clearSelected();
+                selectedDrawing = found;
+                selectedDrawing.setSelected(true);
+                System.out.println("Selected: " + selectedDrawing);
+            }
+        }
+        
         repaint();
     }
     

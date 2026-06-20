@@ -8,7 +8,7 @@ public class MyDrawing
     private Color lineColor = Color.black; 
     private Color fillColor = Color.white;
     private boolean isSelected = false;
-    private Shape region;
+    protected Shape region;
     final int SIZE = 7;
 
     private int lineWidth;
@@ -73,14 +73,14 @@ public class MyDrawing
     public void draw (Graphics g){
         if(isSelected){
             g.setColor(Color.black);
-            g.drawRect(x+w/2-SIZE/2, y-SIZE/2, SIZE, SIZE);
-            g.drawRect(x-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
-            g.drawRect(x+w/2-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
-            g.drawRect(x+w-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
-            g.drawRect(x-SIZE/2, y-SIZE/2, SIZE, SIZE);
-            g.drawRect(x+w-SIZE/2, y-SIZE/2, SIZE, SIZE);
-            g.drawRect(x-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
-            g.drawRect(x+w-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
+            g.fillRect(x+w/2-SIZE/2, y-SIZE/2, SIZE, SIZE);
+            g.fillRect(x-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
+            g.fillRect(x+w/2-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
+            g.fillRect(x+w-SIZE/2, y+h/2-SIZE/2, SIZE, SIZE);
+            g.fillRect(x-SIZE/2, y-SIZE/2, SIZE, SIZE);
+            g.fillRect(x+w-SIZE/2, y-SIZE/2, SIZE, SIZE);
+            g.fillRect(x-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
+            g.fillRect(x+w-SIZE/2, y+h-SIZE/2, SIZE, SIZE);
         }
     }
 
@@ -214,7 +214,7 @@ public class MyDrawing
     }
 
     public void setRegion(){
-
     }
+
 }
 

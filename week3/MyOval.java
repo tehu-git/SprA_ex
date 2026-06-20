@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
 public class MyOval extends MyDrawing
 {
@@ -15,7 +16,13 @@ public class MyOval extends MyDrawing
         super(x, y, w, h);
     }
 
+    @Override
+    public void setRegion(){
+        region = new Ellipse2D.Double(getX(), getY(), getW(), getH());
+    }
+
     public void draw( Graphics g){
+        setRegion();
         int x = getX();
         int y = getY();
         int w = getW();
@@ -55,5 +62,6 @@ public class MyOval extends MyDrawing
             g2.drawOval(x, y, w, h);
         }
         g2.drawOval(x, y, w, h);
+        super.draw(g);
     }
 }
