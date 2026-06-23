@@ -2,7 +2,7 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
-public class MyDrawing 
+public class MyDrawing implements Cloneable
 {
     private int x, y, w, h, size;
     private Color lineColor = Color.black; 
@@ -214,6 +214,18 @@ public class MyDrawing
     }
 
     public void setRegion(){
+    }
+
+    @Override
+    public MyDrawing clone(){
+        try {
+            MyDrawing copy = (MyDrawing) super.clone();
+            copy.setSelected(false);
+            return copy;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

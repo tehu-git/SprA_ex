@@ -12,6 +12,7 @@ public class StateManager {
 
     public StateManager(MyCanvas canvas){
         this.canvas = canvas;
+        this.mediator = canvas.getMediator();
         nowState = null;
         dashed = false;
         shadow = false;
@@ -30,6 +31,10 @@ public class StateManager {
 
     public void setShadow(boolean s){
         this.shadow = s;
+        if (mediator.getSelectedDrawing() != null){
+            mediator.getSelectedDrawing().setShadow(s);
+        }
+        mediator.repaint();
     }
 
     public boolean getDashed(){
@@ -50,6 +55,10 @@ public class StateManager {
 
     public void setBold(boolean b){
         this.bold = b;
+        if (mediator.getSelectedDrawing() != null){
+            mediator.getSelectedDrawing().setBold(b);
+        }
+        mediator.repaint();
     }
 
     public boolean getBold(){

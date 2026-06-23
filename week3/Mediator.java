@@ -6,6 +6,7 @@ public class Mediator {
     Vector<MyDrawing> drawings;
     MyCanvas canvas;
     MyDrawing selectedDrawing = null;
+    MyDrawing buffer = null;
 
     public Mediator(MyCanvas canvas){
         this.canvas = canvas;
@@ -36,6 +37,32 @@ public class Mediator {
         }
     }
 
+    public void clearbuffer(){
+        buffer = null;
+    }
+
+    public void copy(){
+        clearbuffer();
+        buffer = selectedDrawing;
+    }
+
+    public void cut(){
+        clearbuffer();
+        buffer = selectedDrawing.clone();
+        removeDrawing(selectedDrawing);
+        canvas.repaint();
+    }
+
+    public void paste(){
+        if(buffer != null){
+            MyDrawing pasteDrawing = buffer.clone();
+            pasteDrawing.move(10, 10);
+            addDrawing(pasteDrawing);
+            buffer = pasteDrawing;
+            repaint();
+        }
+    }
+
     public void repaint(){
         canvas.repaint();
     }
@@ -49,8 +76,13 @@ public class Mediator {
 
     public void setColor(Color c){
         if (selectedDrawing != null){
-            selectedDrawing.setLineColor(c);
             selectedDrawing.setFillColor(c);
+        }
+    }
+
+    public void setLineColor(Color c){
+        if (selectedDrawing != null){
+            selectedDrawing.setLineColor(c);
         }
     }
 
@@ -71,6 +103,9 @@ public class Mediator {
                 selectedDrawing.setSelected(true);
                 System.out.println("Selected: " + selectedDrawing);
             }
+        } else {
+            clearSelected();
+            //System.out.println("Selected: null");
         }
         
         repaint();
