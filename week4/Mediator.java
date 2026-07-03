@@ -131,5 +131,20 @@ public class Mediator {
         
         repaint();
     }
+
+    public void RectsetSelected(MyDrawing setRect){
+        clearSelected();
+        Rectangle srect = new Rectangle(setRect.getX(), setRect.getY(), setRect.getW(), setRect.getH());
+
+        for (MyDrawing d : drawings) {
+            if (d == setRect) {
+                continue;
+            }
+            if(srect.intersects(d.getRegion())){
+                selectedDrawings.add(d);
+                d.setSelected(true);
+            }
+        }
+    }
     
 }
