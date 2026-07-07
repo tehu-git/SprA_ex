@@ -1,5 +1,5 @@
 import java.awt.*;
-
+import java.util.Vector;
 import javax.print.attribute.standard.Media;
 import javax.swing.*;
 import java.awt.event.*;
@@ -163,9 +163,11 @@ public class MyApplication extends JFrame implements ActionListener
             public void keyPressed(KeyEvent e){
                 if(e.getKeyCode() == KeyEvent.VK_DELETE){
                     Mediator med = stateManager.getMediator();
-                    MyDrawing selected = med.getSelectedDrawing();
+                    Vector<MyDrawing> selected = med.getSelectedDrawings();
                     if(selected != null){
-                        med.removeDrawing(selected);
+                        for (MyDrawing d : selected){
+                            med.removeDrawing(d);
+                        }
                         med.clearSelected();
                         med.repaint();
                     }

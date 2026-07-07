@@ -27,7 +27,7 @@ public class SelectmodeButton extends JButton implements State
     @Override
     public void mouseDown(int x, int y){
         stateManager.getMediator().setSelected(x, y);
-        if (stateManager.getMediator().getSelectedDrawings() != null){
+        if (!stateManager.getMediator().getSelectedDrawings().isEmpty()){
             lastX = x;
             lastY = y;
         }
@@ -36,20 +36,29 @@ public class SelectmodeButton extends JButton implements State
             startY = y;
             selectRect = new MyRectangle(x, y, 0, 0);
             selectRect.setDashed(true);
+            selectRect.setFillColor(new Color(0, 0, 0, 0));
+            stateManager.addDrawing(selectRect);
         }
     }
 
     public void mouseUp(int x, int y){
         if (selectRect != null){
+            int rectX = selectRect.getX();
+            int rectY = selectRect.getY();
+            int rectW = selectRect.getW();
+            int rectH = selectRect.getH();
+            stateManager.getMediator().removeDrawing(selectRect);
+            stateManager.getMediator().RectsetSelected(rectX, rectY, rectW, rectH);
             
         }
+        repaint();
     }
 
     public void mouseDrag(int x, int y){
-        if (stateManager.getMediator().getSelectedDrawings() != null){
+        if (!stateManager.getMediator().getSelectedDrawings().isEmpty()){
             int dx = x - lastX;
             int dy = y - lastY;
-            if (stateManager.getMediator().getSelectedDrawings() != null){
+            if (!stateManager.getMediator().getSelectedDrawings().isEmpty()){
                 stateManager.getMediator().move(dx, dy);
                 lastX = x;
                 lastY = y;

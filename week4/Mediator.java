@@ -68,11 +68,12 @@ public class Mediator {
         if(buffer != null){
             Vector<MyDrawing> pasteDrawings = new Vector<MyDrawing>();
             for (MyDrawing d : buffer){
-                d.clone();
-                d.move(10, 10);
-                addDrawing(d);
-                pasteDrawings.add(d);
+                MyDrawing cloned = d.clone();
+                cloned.move(10, 10);
+                addDrawing(cloned);
+                pasteDrawings.add(cloned);
             }
+            buffer = pasteDrawings;
             repaint();
         }
     }
@@ -132,19 +133,18 @@ public class Mediator {
         repaint();
     }
 
-    public void RectsetSelected(MyDrawing setRect){
+    public void RectsetSelected(int sx, int sy, int sw, int sh){
         clearSelected();
-        Rectangle srect = new Rectangle(setRect.getX(), setRect.getY(), setRect.getW(), setRect.getH());
-
         for (MyDrawing d : drawings) {
-            if (d == setRect) {
-                continue;
-            }
-            if(srect.intersects(d.getRegion())){
-                selectedDrawings.add(d);
-                d.setSelected(true);
+            Shape reigion = d.getRegion();
+            if (reigion != null) {
+                if (reigion.intersects(sx, sy, sw, sh)) {
+                    selectedDrawings.add(d);
+                    d.setSelected(true);
+                }
             }
         }
+        repaint();
     }
     
 }

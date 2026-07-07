@@ -216,6 +216,10 @@ public class MyDrawing implements Cloneable
     public void setRegion(){
     }
 
+    public Shape getRegion(){
+        return region;
+    }
+
     @Override
     public MyDrawing clone(){
         try {
