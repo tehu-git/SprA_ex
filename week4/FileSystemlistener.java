@@ -2,10 +2,7 @@ import java.awt.*;
 import javax.print.attribute.standard.Media;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Vector;
 
 public class FileSystemlistener implements ActionListener 
@@ -22,27 +19,38 @@ public class FileSystemlistener implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        JFileChooser jc = new JFileChooser();
         if (mode == 1) {
-            try {
-                FileInputStream fin = new FileInputStream("file.txt");
-                ObjectInputStream in = new ObjectInputStream(fin);
+            int returnVal = jc.showOpenDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = jc.getSelectedFile();
+                
+                try {
+                    FileInputStream fin = new FileInputStream(file);
+                    ObjectInputStream in = new ObjectInputStream(fin);
 
-                Vector<MyDrawing> v = (Vector<MyDrawing>)in.readObject();
-                mediator.setDrawings(v);
-                fin.close();
-            } catch (Exception ex) {
+                    Vector<MyDrawing> v = (Vector<MyDrawing>)in.readObject();
+                    mediator.setDrawings(v);
+                    fin.close();
+                } catch (Exception ex) {
+                }
             }
         }
         else if (mode == 0) {
-            try {
-                FileOutputStream fout = new FileOutputStream("file.txt");
-                ObjectOutputStream out = new ObjectOutputStream(fout);
+            int returnVal = jc.showSaveDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
 
-                out.writeObject(mediator.getDrawings());
-                out.flush();
+                File file = jc.getSelectedFile();
+                try {
+                    FileOutputStream fout = new FileOutputStream(file);
+                    ObjectOutputStream out = new ObjectOutputStream(fout);
 
-                fout.close();
-            } catch (Exception ex) {
+                    out.writeObject(mediator.getDrawings());
+                    out.flush();
+
+                    fout.close();
+                } catch (Exception ex) {
+                }
             }
         }
 
