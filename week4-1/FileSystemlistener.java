@@ -2,10 +2,7 @@ import java.awt.*;
 import javax.print.attribute.standard.Media;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Vector;
 
 public class FileSystemlistener implements ActionListener 
