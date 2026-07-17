@@ -49,7 +49,7 @@ public class FileSystemlistener implements ActionListener
                 try {
                     FileOutputStream fout = new FileOutputStream(file);
                     ObjectOutputStream out = new ObjectOutputStream(fout);
-
+                    mediator.clearSelected();
                     out.writeObject(mediator.getDrawings());
                     out.flush();
 
