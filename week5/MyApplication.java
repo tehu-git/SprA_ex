@@ -21,8 +21,19 @@ public class MyApplication extends JFrame implements ActionListener
 
     public MyApplication(){
         try {
-    // OS標準の美しい見た目（Look & Feel）を適用する
+    // 5:見た目変更
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        Font modernFont = new Font("SansSerif", Font.PLAIN, 12);
+    
+        // アプリケーション内のすべてのUI部品のデフォルトフォントを上書きする
+        java.util.Enumeration<Object> keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource) {
+                UIManager.put(key, new javax.swing.plaf.FontUIResource(modernFont));
+            }
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,11 +43,19 @@ public class MyApplication extends JFrame implements ActionListener
         canvas.setBackground(Color.white);
         canvas.setFocusable(true);
 
-        JPanel jp = new JPanel();
-        jp.setLayout(new FlowLayout());
+        //パネルの設定
+        //JPanel jp = new JPanel();
+        //jp.setLayout(new FlowLayout());
+
+        JPanel toolPanel = new JPanel(new GridLayout(0, 1, 5, 5));
+        toolPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel propertyPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+
+
 
         stateManager = new StateManager(canvas);
         
+        // メニューバーの作成
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         fileMenu = new JMenu("File");
@@ -72,6 +91,7 @@ public class MyApplication extends JFrame implements ActionListener
         JLabel colorLabel = new JLabel("Select Color:");
         JLabel lineLabel = new JLabel("Select Line Color:");
 
+        //fillColorのコンボボックスを作成
         JComboBox<String> colorComboBox = new JComboBox<>(colorOptions);
         colorComboBox.addActionListener(new ActionListener() {
             @Override
@@ -98,6 +118,7 @@ public class MyApplication extends JFrame implements ActionListener
             }
         });
 
+        //LineColorのコンボボックスを作成
         JComboBox<String> lineColorComboBox = new JComboBox<>(colorOptions);
         lineColorComboBox.addActionListener(new ActionListener() {
             @Override
@@ -124,38 +145,50 @@ public class MyApplication extends JFrame implements ActionListener
             }
         });
 
-        jp.add(lineLabel);
-        jp.add(lineColorComboBox);
 
+            
 
-        jp.add(colorLabel);
-        jp.add(colorComboBox);        
-
-
+        //ツールパネルにボタンを追加
         SelectmodeButton selectButton = new SelectmodeButton(stateManager);
-        jp.add(selectButton);
+        toolPanel.add(selectButton);
         RectButton rectButton = new RectButton(stateManager);
-        jp.add(rectButton);
+        toolPanel.add(rectButton);
         OvalButton ovalbutton = new OvalButton(stateManager);
-        jp.add(ovalbutton);
+        toolPanel.add(ovalbutton);
         fiveStarButton starButton = new fiveStarButton(stateManager);
-        jp.add(starButton);
+        toolPanel.add(starButton);
         HendecagonButton hendecagButton = new HendecagonButton(stateManager);
-        jp.add(hendecagButton);
-        shadowButton shadowbutton = new shadowButton(stateManager);
-        jp.add(shadowbutton);
-        dashBox dashbox = new dashBox(stateManager);
-        jp.add(dashbox);
-        changeDash changeDash = new changeDash(stateManager);
-        jp.add(changeDash);
-        boldBox boldbox = new boldBox(stateManager);
-        jp.add(boldbox);
-        tripleLineBox triplinebox = new tripleLineBox(stateManager);
-        jp.add(triplinebox);
+        toolPanel.add(hendecagButton);
 
+        //プロパティパネルにボタンを追加
+        shadowButton shadowbutton = new shadowButton(stateManager);
+        propertyPanel.add(shadowbutton);
+        dashBox dashbox = new dashBox(stateManager);
+        propertyPanel.add(dashbox);
+        changeDash changeDash = new changeDash(stateManager);
+        propertyPanel.add(changeDash);
+        boldBox boldbox = new boldBox(stateManager);
+        propertyPanel.add(boldbox);
+        tripleLineBox triplinebox = new tripleLineBox(stateManager);
+        propertyPanel.add(triplinebox);
+
+        propertyPanel.add(lineLabel);
+        propertyPanel.add(lineColorComboBox);
+
+        propertyPanel.add(colorLabel);
+        propertyPanel.add(colorComboBox);    
+
+
+        //カラーパネルの作成
+        JColorChooser colorChooser = new JColorChooser();
+        
+
+        //レイアウトの設定
         getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(jp, BorderLayout.NORTH);
+        getContentPane().add(propertyPanel, BorderLayout.NORTH);
+        getContentPane().add(toolPanel, BorderLayout.WEST);
         getContentPane().add(canvas, BorderLayout.CENTER);
+        getContentPane().add(colorChooser, BorderLayout.EAST);
 
         canvas.addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent e){
