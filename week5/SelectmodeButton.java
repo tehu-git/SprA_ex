@@ -49,9 +49,10 @@ public class SelectmodeButton extends JButton implements State
             int rectH = selectRect.getH();
             stateManager.getMediator().removeDrawing(selectRect);
             stateManager.getMediator().RectsetSelected(rectX, rectY, rectW, rectH);
-            
+            selectRect = null;
+            repaint();
         }
-        repaint();
+        
     }
 
     public void mouseDrag(int x, int y){

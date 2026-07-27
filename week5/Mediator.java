@@ -31,7 +31,6 @@ public class Mediator {
         drawings.add(d);
         //setSelectedDrawing(d);
     }
-    
 
     public void removeDrawing(MyDrawing d){
         drawings.remove(d);
@@ -100,6 +99,16 @@ public class Mediator {
             selectedDrawings.clear();
         }
     }
+
+    public void setselectedLineAlpha(int alpha){
+        if (selectedDrawings != null){
+            for (MyDrawing d : selectedDrawings){
+                d.setLineAlpha(alpha);
+            }
+        }
+    }
+
+
 
     public void setColor(Color c){
         if (selectedDrawings != null){

@@ -8,6 +8,8 @@ public class MyDrawing implements Cloneable, Serializable
     private int x, y, w, h, size;
     private Color lineColor = Color.black; 
     private Color fillColor = Color.white;
+    private int lineAlpha = 255;
+    private int fillAlpha = 255;
     private boolean isSelected = false;
     protected transient Shape region;
     final int SIZE = 7;
@@ -181,7 +183,7 @@ public class MyDrawing implements Cloneable, Serializable
         return h;
     }
 
-    public int setSize(){
+    public int getSize(){
         return size;
     }
 
@@ -221,6 +223,28 @@ public class MyDrawing implements Cloneable, Serializable
         return region;
     }
 
+    public void setLineAlpha(int alpha){
+        this.lineAlpha = alpha;
+        if(this.lineColor != null) {
+            this.lineColor = new Color(
+                this.lineColor.getRed(), 
+                this.lineColor.getGreen(),
+                this.lineColor.getBlue(), 
+                this.lineAlpha);
+        }
+    }
+
+    public void setFillAlpha(int alpha){
+        this.fillAlpha = alpha;
+        if(this.fillColor != null) {
+            this.fillColor = new Color(
+                this.fillColor.getRed(), 
+                this.fillColor.getGreen(),
+                this.fillColor.getBlue(), 
+                this.fillAlpha);
+        }
+    }
+
     @Override
     public MyDrawing clone(){
         try {
@@ -232,6 +256,5 @@ public class MyDrawing implements Cloneable, Serializable
             return null;
         }
     }
-
 }
 
