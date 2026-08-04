@@ -8,9 +8,17 @@ public class Mediator {
     Vector<MyDrawing> selectedDrawings = new Vector<MyDrawing>();
     Vector<MyDrawing> buffer = null;
 
+    private Vector<Vector<MyDrawing>> history = new Vector<Vector<MyDrawing>>();
+    private int historyIndex;
+
     public Mediator(MyCanvas canvas){
         this.canvas = canvas;
         drawings = new Vector<MyDrawing>();
+
+        history = new Vector<Vector<MyDrawing>>();
+        historyIndex = -1;
+
+        saveState();
     }
 
     public Enumeration<MyDrawing> drawingsElements(){
@@ -123,6 +131,71 @@ public class Mediator {
             for (MyDrawing d : selectedDrawings){
                 d.setLineColor(c);
             }
+        }
+    }
+
+    public void setfillAlpha(int alpha){
+        if (selectedDrawings != null){
+            for (MyDrawing d : selectedDrawings){
+                d.setFillAlpha(alpha);
+            }
+        }
+    }
+
+    public void setlineAlpha(int alpha){
+        if (selectedDrawings != null){
+            for (MyDrawing d : selectedDrawings){
+                d.setLineAlpha(alpha);
+            }
+        }
+    }
+
+    public void setLineWidth(int width){
+        if (selectedDrawings != null){
+            for (MyDrawing d : selectedDrawings){
+                d.setLineWidth(width);
+            }
+        }
+    }
+
+    private Vector<MyDrawing> cloneDrawings(Vector<MyDrawing> drawingsToClone) {
+        Vector<MyDrawing> clonedDrawings = new Vector<MyDrawing>();
+        for (MyDrawing d : drawingsToClone) {
+            clonedDrawings.add(d.clone());
+        }
+        return clonedDrawings;
+    }
+
+    public void saveState(){
+        while (history.size() > historyIndex + 1) {
+            history.remove(history.size() - 1);
+        }
+
+        history.add(cloneDrawings(drawings));
+        historyIndex = history.size() - 1;
+    }
+
+    public void undo(){
+        if (historyIndex > 0){
+            historyIndex--;
+            drawings = cloneDrawings(history.get(historyIndex));
+            clearSelected();
+            repaint();
+        }
+        else {
+            System.out.println("No history");
+        }
+    }
+
+    public void redo(){
+        if (historyIndex < history.size() - 1){
+            historyIndex++;
+            drawings = cloneDrawings(history.get(historyIndex));
+            clearSelected();
+            repaint();
+        }
+        else {
+            System.out.println("No history");
         }
     }
 

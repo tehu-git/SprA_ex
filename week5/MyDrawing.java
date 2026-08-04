@@ -15,9 +15,9 @@ public class MyDrawing implements Cloneable, Serializable
     final int SIZE = 7;
 
     private int lineWidth;
-    private boolean dashed = false;
+    private int dashmode = 0;
     private boolean shadow = false;
-    private boolean ishortdash = false;
+    //private boolean ishortdash = false;
     private boolean tripline = false;
 
     public MyDrawing(){
@@ -37,12 +37,12 @@ public class MyDrawing implements Cloneable, Serializable
         h = 40;
     }
 
-    public MyDrawing(int x, int y, boolean d){
+    public MyDrawing(int x, int y, int dashmode){
         this.x = x;
         this.y = y;
         w = 40;
         h = 40;
-        this.dashed = d;
+        this.dashmode = dashmode;
     }
 
     public MyDrawing(int x, int y, int w, int h){
@@ -50,16 +50,16 @@ public class MyDrawing implements Cloneable, Serializable
         this.y = y;
         this.w = w;
         this.h = h;
-        //this.dashed = d;
+        //this.dashmode = dashmode;
     }
 
 
-    public MyDrawing(int x, int y, int w, int h, boolean d){
+    public MyDrawing(int x, int y, int w, int h, int dashmode){
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.dashed = d;
+        this.dashmode = dashmode;
     }
 
  
@@ -122,17 +122,19 @@ public class MyDrawing implements Cloneable, Serializable
         this.lineWidth = lineWidth;
     }
 
-    public void setDashed(boolean b){
-        dashed = b;
+    public void setDashmode(int mode){
+        this.dashmode = mode;
     }
 
     public void setShadow(boolean s){
         shadow = s;
     }
 
+    /* 
     public void setShortDashed(boolean d){
         this.ishortdash = d;
     }
+    */
 
     public void setSelected(boolean s){
         this.isSelected = s;
@@ -142,10 +144,11 @@ public class MyDrawing implements Cloneable, Serializable
         return isSelected;
     }
 
-
+    /* 
     public boolean getShortDashed(){
         return this.ishortdash;
     }
+    */
     
     public void setBold(boolean b){
         if (b){
@@ -199,8 +202,8 @@ public class MyDrawing implements Cloneable, Serializable
         return lineWidth;
     }
 
-    public boolean getDashed(){
-        return dashed;
+    public int getDashmode(){
+        return dashmode;
     }
 
     public boolean getShadow(){
@@ -244,6 +247,7 @@ public class MyDrawing implements Cloneable, Serializable
                 this.fillAlpha);
         }
     }
+
 
     @Override
     public MyDrawing clone(){

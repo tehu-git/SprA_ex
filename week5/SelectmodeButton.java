@@ -35,7 +35,7 @@ public class SelectmodeButton extends JButton implements State
             startX = x;
             startY = y;
             selectRect = new MyRectangle(x, y, 0, 0);
-            selectRect.setDashed(true);
+            selectRect.setDashmode(0); // solid line
             selectRect.setFillColor(new Color(0, 0, 0, 0));
             stateManager.addDrawing(selectRect);
         }

@@ -4,29 +4,35 @@ public class StateManager {
     private State nowState;
     private MyCanvas canvas; 
     private Mediator mediator;
-    private boolean dashed;
+    private int dashmode;
     private boolean shadow;
-    private boolean ishortdash;
+    //private boolean ishortdash;
     private boolean bold;
     private boolean tripline;
 
     public StateManager(MyCanvas canvas){
         this.canvas = canvas;
         this.mediator = canvas.getMediator();
-        nowState = null;
-        dashed = false;
-        shadow = false;
-        ishortdash = false;
-        bold = false;
-        tripline = false;
+        this.nowState = null;
+        this.dashmode = 0;
+        this.shadow = false;
+        //this.ishortdash = false;
+        this.bold = false;
+        this.tripline = false;
     }
 
     public void setState(State s){
         nowState = s;
     }
 
-    public void setDashed(boolean d){
-        this.dashed = d;
+    public void setDashmode(int mode){
+        this.dashmode = mode;
+        if (mediator.getSelectedDrawings() != null){
+            for (MyDrawing d : mediator.getSelectedDrawings()) {
+                d.setDashmode(mode);
+            }
+        }
+        mediator.repaint();
     }
 
     public void setShadow(boolean s){
@@ -39,14 +45,15 @@ public class StateManager {
         mediator.repaint();
     }
 
-    public boolean getDashed(){
-        return this.dashed;
+    public int getDashmode(){
+        return this.dashmode;
     }
 
     public boolean getshadow(){
         return this.shadow;
     }
 
+    /*
     public void setShortDashed(boolean d){
         this.ishortdash = d;
     }
@@ -54,7 +61,7 @@ public class StateManager {
      public boolean getShortDashed(){
         return this.ishortdash;
     }
-
+    */
     public void setBold(boolean b){
         this.bold = b;
         if (mediator.getSelectedDrawings() != null){
@@ -102,5 +109,6 @@ public class StateManager {
         if (nowState != null){
             nowState.mouseUp(x, y);
         }
+       mediator.saveState(); // Save the state after mouse up
     }
 }

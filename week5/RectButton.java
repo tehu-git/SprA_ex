@@ -27,10 +27,10 @@ public class RectButton extends JButton implements State
         startX = x;
         startY = y;
         currentDrawing = new MyRectangle(x, y, 0, 0);
-        currentDrawing.setDashed(stateManager.getDashed());
+        currentDrawing.setDashmode(stateManager.getDashmode());
         stateManager.addDrawing(currentDrawing);
         currentDrawing.setShadow(stateManager.getshadow());
-        currentDrawing.setShortDashed(stateManager.getShortDashed());
+        //currentDrawing.setShortDashed(stateManager.getShortDashed());
         currentDrawing.setBold(stateManager.getBold());
         currentDrawing.setTripLine(stateManager.getTripLine());
         currentDrawing.setRegion();

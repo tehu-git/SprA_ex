@@ -28,9 +28,9 @@ public class OvalButton extends JButton implements State
         startY = y;
         currentDrawing = new MyOval(x, y, 0, 0);
         stateManager.addDrawing(currentDrawing);
-        currentDrawing.setDashed(stateManager.getDashed());
+        currentDrawing.setDashmode (stateManager.getDashmode());
         currentDrawing.setShadow(stateManager.getshadow());
-        currentDrawing.setShortDashed(stateManager.getShortDashed());
+        //currentDrawing.setShortDashed(stateManager.getShortDashed());
         currentDrawing.setBold(stateManager.getBold());
         currentDrawing.setTripLine(stateManager.getTripLine());
     }

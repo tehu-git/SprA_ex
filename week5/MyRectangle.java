@@ -12,8 +12,8 @@ public class MyRectangle extends MyDrawing
         super(x, y, w, h);
     }
 
-    public MyRectangle(int x, int y, boolean isdashed){
-        super(x, y, isdashed);
+    public MyRectangle(int x, int y, int w, int h, int dashmode){
+        super(x, y, w, h, dashmode);
     }
     @Override
     public void setRegion(){
@@ -38,17 +38,8 @@ public class MyRectangle extends MyDrawing
         g2.fillRect(x + 5, y + 5, w, h); 
         }
 
-        if(getDashed()){
-            if (getShortDashed()){
-                g2.setStroke(new MyshortDashStroke(getLineWidth()));
-            }
-            else{
-                g2.setStroke(new MyDashStroke(getLineWidth()));
-            }
-        }
-        else{
-            g2.setStroke(new BasicStroke(getLineWidth()));
-        }
+        g2.setStroke(MyDashStroke.passStroke(getLineWidth(), getDashmode()));
+        
         //g2.setStroke(new BasicStroke(getLineWidth()));
         g2.setColor(getFillColor());
         g2.fillRect(x, y, w, h);

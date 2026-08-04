@@ -6,5 +6,5 @@ public class MyshortDashStroke extends BasicStroke
 
     public MyshortDashStroke(float linewidth){
         super(linewidth, CAP_BUTT, JOIN_BEVEL, 1.0f, pattern, 0);
-    }    
+    }
 }

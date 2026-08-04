@@ -29,12 +29,7 @@ public class MyfiveStar extends MyDrawing
         }
 
         Graphics2D g2 = (Graphics2D) g;
-        if(getDashed()){
-            g2.setStroke(new MyDashStroke(getLineWidth()));
-        }
-        else{
-            g2.setStroke(new BasicStroke(getLineWidth()));
-        }
+        g2.setStroke(MyDashStroke.passStroke(getLineWidth(), getDashmode()));
         //g2.setStroke(new BasicStroke(getLineWidth()));
         //g2.setColor(getFillColor());
         g2.setColor(getLineColor());
